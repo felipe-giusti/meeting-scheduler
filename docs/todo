@@ -1,0 +1,20 @@
+
+### Main functionality
+
+# Meeting Scheduler
+- base class for a scheduler
+  - create meeting
+  - edit meeting
+  - Send notification via scheduler?
+- impl for Zoom
+- impl for Teams
+    refs:
+    https://learn.microsoft.com/en-us/graph/api/application-post-onlinemeetings?view=graph-rest-1.0&tabs=http
+    https://learn.microsoft.com/en-us/graph/api/resources/onlinemeeting?view=graph-rest-1.0
+
+# Custom email sender
+    - msg
+    - to
+    - cc
+    - attachments
+
