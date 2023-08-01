@@ -1,4 +1,12 @@
 
+### WORKING ON
+# PDF READER
+ - add logic when more than 1 page
+   - participant names / emails for every page, rest of the information only first page
+     - * check if company name field can change later
+ - add date parser logic to model
+
+
 ### Main functionality
 
 # Meeting Scheduler
@@ -17,4 +25,9 @@
     - to
     - cc
     - attachments
+
+# interface
+ - add interface to show document with annotations
+ - add interface to customize annotations -- select area ???
+ - validation step -- show errors / ... - ex: len(emails) != len(names)
 
