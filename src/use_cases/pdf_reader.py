@@ -20,9 +20,11 @@ class PdfReader:
             course_name = self.get_value(page, Rects.COURSE_NAME.value)
             company_name = self.get_value(page, Rects.COMPANY_NAME.value)
             instructor_name = self.get_value(page, Rects.INSTRUCTOR_NAME.value)
+            dates = self.get_list(page, Rects.DATES.value)
             
-            return Course(names, emails, duration, course_code, course_name, 
-                          company_name, instructor_name)
+            return Course(participant_names=names, participant_emails=emails, course_code=course_code, 
+                          course_name=course_name, company_name=company_name, instructor_name=instructor_name, 
+                          duration_hours=duration, dates=dates)
 
                 
     def get_value(self, page, rect):

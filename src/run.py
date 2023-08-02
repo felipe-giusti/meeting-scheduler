@@ -9,5 +9,5 @@ reader = PdfReader(filename)
 
 course = reader.get_data()
 
-# pprint.pprint(course.__dict__)
-print(course.course_name)
+pprint.pprint(course.__dict__)
+# print(course.course_name)
