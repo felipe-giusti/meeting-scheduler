@@ -1,2 +1,4 @@
 python-dotenv
 PyMuPDF
+azure-identity
+msgraph-sdk #beta - consider using default requests
