@@ -1,13 +1,50 @@
 from use_cases.pdf_reader import PdfReader
-import sys, pprint
+import sys, pprint, time
+
+from adapters.zoom.auth_zoom import ZoomOauth
+from adapters.zoom.zoom_meeting import ZoomMeeting
+from dotenv import load_dotenv
+from exceptions import AuthException
 
 
-args = sys.argv[1:]
+load_dotenv()
+# args = sys.argv[1:]
 
-filename = args[0]
-reader = PdfReader(filename)
+# filename = args[0]
+# reader = PdfReader(filename)
 
-course = reader.get_data()
+# course = reader.get_data()
 
-pprint.pprint(course.__dict__)
+# pprint.pprint(course.__dict__)
 # print(course.course_name)
+
+auth = ZoomOauth()
+
+device_resp = auth.get_device_code()
+print(f'device resp: {device_resp}')
+auth.verify_user(device_resp)
+
+token_resp = None
+timeout = 30
+timeout_start = time.time()
+time.sleep(5)
+while time.time() < timeout_start + timeout:
+    try:
+        time.sleep(device_resp.interval)
+        token_resp = auth.get_access_token(device_resp)
+        break
+    except AuthException:
+        pass
+
+if token_resp is None:
+    print('error getting token')
+    raise Exception
+
+print('TOKEN ============')
+print(vars(token_resp))
+print('==============')
+
+zoom = ZoomMeeting()
+user = zoom.get_user(token_resp.access_token)
+
+pprint.pprint(user)
