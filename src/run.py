@@ -8,15 +8,15 @@ from exceptions import AuthException
 
 
 load_dotenv()
-# args = sys.argv[1:]
+args = sys.argv[1:]
 
-# filename = args[0]
-# reader = PdfReader(filename)
+filename = args[0]
+reader = PdfReader(filename)
 
-# course = reader.get_data()
+course = reader.get_data()
 
-# pprint.pprint(course.__dict__)
-# print(course.course_name)
+pprint.pprint(course.__dict__)
+print(course.start_dt_utc.strftime("%Y-%m-%dT%H:%M:%SZ"))
 
 auth = ZoomOauth()
 
@@ -45,6 +45,6 @@ print(vars(token_resp))
 print('==============')
 
 zoom = ZoomMeeting()
-user = zoom.get_user(token_resp.access_token)
+meeting = zoom.create_meeting(token_resp.access_token, course)
 
-pprint.pprint(user)
+pprint.pprint(meeting)
