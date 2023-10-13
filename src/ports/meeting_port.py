@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Meeting(ABC):
     
     @abstractmethod
-    def create_meeting(self):
+    def create_meeting(self, token, course):
         pass
     
     # @abstractmethod

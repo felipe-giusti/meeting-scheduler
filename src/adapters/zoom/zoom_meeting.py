@@ -17,8 +17,8 @@ class ZoomMeeting(Meeting):
             },
             "settings": {
                 
-                "calendar_type": 2, #TODO consider later
-                "email_notification": True,
+                # "calendar_type": 2, #TODO consider later
+                # "email_notification": True,
 
                 "meeting_invitees": [
                 {
@@ -28,7 +28,7 @@ class ZoomMeeting(Meeting):
                 ],
 
                 # "private_meeting": False,
-                "registrants_confirmation_email": True,
+                # "registrants_confirmation_email": True,
                 # "registrants_email_notification": True,
                 
                 # "continuous_meeting_chat": {
@@ -46,12 +46,14 @@ class ZoomMeeting(Meeting):
         json_body = json.dumps(meeting_body)
         resp = requests.post('https://api.zoom.us/v2/users/me/meetings',
                              data=json_body,
-                             headers={'Authorization': f'Bearer {token}'})
-        resp_json = resp.json()
+                             headers={'Authorization': f'Bearer {token}',
+                                      'Content-Type': 'application/json'})
         
         if resp.status_code != 201:
-            log.error(f'Error while creating zoom meeting: {resp.status_code} - {resp_json}')
-            
+            log.error(f'Error while creating zoom meeting: {resp.status_code} - {resp.text}')
+            raise Exception('Error creating zoom meeting')
+        
+        resp_json = resp.json()
         return resp_json
     
     def get_user(self, token):

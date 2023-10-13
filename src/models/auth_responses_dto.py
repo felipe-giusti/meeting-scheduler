@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -10,6 +10,7 @@ class ZoomDeviceResponse():
     verification_uri_complete: str
     expires_in: int
     interval: int
+    was_cached: bool = field(init=False) # TODO change later
 
 
 @dataclass
@@ -19,3 +20,7 @@ class ZoomTokenResponse():
     refresh_token: str
     expires_in: int
     scope: Any
+    was_cached: bool = field(init=False) # TODO change later
+    
+    def get_token(self):
+        return self.access_token

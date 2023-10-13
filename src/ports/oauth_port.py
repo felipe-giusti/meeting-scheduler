@@ -11,9 +11,13 @@ class OAuth(ABC):
         pass
     
     @abstractmethod
-    def verify_user(self):
+    def verify_user(self, device_resp):
         pass
     
     @abstractmethod
-    def get_access_token(self):
+    def _get_access_token(self, device_resp):
+        pass
+    
+    @abstractmethod
+    def request_access_token(self, device_resp, timeout=30, interval=5):
         pass
