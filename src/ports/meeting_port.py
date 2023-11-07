@@ -4,24 +4,20 @@ from abc import ABC, abstractmethod
 class Meeting(ABC):
     
     @abstractmethod
-    def authenticate(self):
+    def create_meeting(self, token, course):
         pass
     
-    @abstractmethod
-    def create_meeting(self):
-        pass
+    # @abstractmethod
+    # def get_particiants(self):
+    #     pass
     
-    @abstractmethod
-    def get_particiants(self):
-        pass
+    # @abstractmethod
+    # def add_participants(self):
+    #     pass
     
-    @abstractmethod
-    def add_participants(self):
-        pass
-    
-    @abstractmethod
-    def remove_participants(self):
-        pass
+    # @abstractmethod
+    # def remove_participants(self):
+    #     pass
     
     # validate -- change 
     # def edit_meeting(self):

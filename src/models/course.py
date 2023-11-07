@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import List, Union
 import datetime as dt
 import logging
+import pytz
 
 log = logging.getLogger('scheduler_log')
 
@@ -17,6 +18,13 @@ class Course:
     dates: List[str]
     _duration_hours: float = field(init=False, repr=False)
     _dates: List[dt.date] = field(init=False, repr=False)
+    start_dt_utc: dt.datetime = field(init=False)
+    end_dt_utc: dt.datetime = field(init=False)
+    
+    def __post_init__(self):
+        self.start_dt_utc = self._local_to_utc_datetime(self.dates[0])
+        self.end_dt_utc = self._local_to_utc_datetime(self.dates[-1])
+        
     
     @property
     def duration_hours(self) -> float:
@@ -55,3 +63,12 @@ class Course:
             except ValueError:
                 log.error(f'Não foi possível converter a data do treinamento - esperado DD/MM, recebido {date}')
         self._dates = dates
+        
+    
+    # TODO consider creating an util class
+    def _local_to_utc_datetime(self, date: dt.date, local_str: str="America/Sao_Paulo", hour: int=15, minute: int=0):
+        local = pytz.timezone(local_str)
+        naive_dt = dt.datetime.combine(date, dt.time(hour=hour, minute=minute))
+        local_dt = local.localize(naive_dt, is_dst=None)
+        utc_dt = local_dt.astimezone(pytz.utc)
+        return utc_dt
