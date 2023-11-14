@@ -5,6 +5,8 @@ This is an automation project to create meetings or events given a pdf template.
 
 The user will be able to select in which service the meeting needs to be created and input a pdf file to generate the meeting on the selected service, an email can also be sent to participants.
 
+More documentation at [docs directory](./docs/)
+
 ## Coding practice
 
 This project (helped me practice and) has some examples of:
